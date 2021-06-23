@@ -1,0 +1,34 @@
+name: Deploy all Insurtech APIs
+
+on:
+  push:
+    branches:
+      - demo
+    paths: insurtech/**
+
+jobs:
+  API-Deployment:
+    if: "!contains(github.event.head_commit.message, '[SKIP-CI]')" 
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        api:
+          - payl
+         # - gfgl
+    steps:
+      - 
+        name: Checkout the git repository
+        uses: actions/checkout@v2
+      - 
+        name: Generate files from templates
+        uses: ./.github/actions/filter-files
+      - 
+        name: Publish couponing APIs
+        uses: Axway/presales-apim-cli-action@v0
+        env:
+          APIM_USER: ${{ secrets.APIM_USER }}
+          APIM_PASS: ${{ secrets.APIM_PASS }}
+          APIM_HOST: ${{ secrets.APIM_HOST }}
+          APIM_PORT: ${{ secrets.APIM_PORT }}
+        with:
+          command: api import -c insurtech/${{ matrix.api }}/${{ matrix.api }}.json

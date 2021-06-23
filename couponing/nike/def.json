@@ -1,0 +1,29 @@
+{
+  "name" : "Coupons for Nike",
+  "path" : "/nike",
+  "state" : "published",
+  "version" : "1.0",
+  "organization" : "API Development",
+  "apiDefinition" : "nike.yaml",
+  "backendBasepath" : "http://ptx136.demo.axway.com:8081/nike/",
+  "image" : "nike.jpg",
+  "securityProfiles" : [ {
+    "name" : "_default",
+    "isDefault" : true,
+    "devices" : [ {
+      "name" : "API Key",
+      "type" : "apiKey",
+      "order" : 1,
+      "properties" : {
+        "apiKeyFieldName" : "KeyId",
+        "takeFrom" : "HEADER",
+        "removeCredentialsOnSuccess" : "true"
+      }
+    } ]
+  } ],
+  "tags" : {
+    "Team" : [ "Loyalty" ],
+    "Generated": [ "true" ]
+  },
+  "clientOrganizations" : [ "API Development" ]
+}

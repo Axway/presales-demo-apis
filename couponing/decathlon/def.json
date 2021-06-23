@@ -1,0 +1,30 @@
+{
+  "name" : "Bons de réduction Décathlon",
+  "path" : "/decathlon",
+  "state" : "published",
+  "version" : "1.0",
+  "organization" : "API Development",
+  "apiDefinition" : "decathlon.yaml",
+  "summary" : "Get coupons with your email",
+  "backendBasepath" : "http://ptx136.demo.axway.com:8081/decathlon/",
+  "image" : "decathlon.jpg",
+  "securityProfiles" : [ {
+    "name" : "_default",
+    "isDefault" : true,
+    "devices" : [ {
+      "name" : "API Key",
+      "type" : "apiKey",
+      "order" : 1,
+      "properties" : {
+        "apiKeyFieldName" : "KeyId",
+        "takeFrom" : "HEADER",
+        "removeCredentialsOnSuccess" : "true"
+      }
+    } ]
+  } ],
+  "tags" : {
+    "Team" : [ "Loyalty" ],
+    "Generated": [ "true" ]
+  },
+  "clientOrganizations" : [ "API Development" ]
+}

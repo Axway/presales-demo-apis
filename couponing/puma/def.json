@@ -1,0 +1,32 @@
+{
+  "name" : "Puma coupon system v4",
+  "path" : "/puma",
+  "state" : "published",
+  "version" : "1.0",
+  "organization" : "API Development",
+  "apiDefinition" : "puma.yaml",
+  "backendBasepath" : "http://ptx136.demo.axway.com:8081/puma/",
+  "image" : "puma-old.jpg",
+  "summary": "Puma, Forever Faster",
+  "descriptionType": "manual",
+  "descriptionManual": "Get coupons to buy new *Puma* products",
+  "securityProfiles" : [ {
+        "name" : "_default",
+        "isDefault" : true,
+        "devices" : [ {
+              "name" : "API Key",
+              "type" : "apiKey",
+              "order" : 1,
+              "properties" : {
+                 "apiKeyFieldName" : "KeyId",
+                 "takeFrom" : "HEADER",
+                 "removeCredentialsOnSuccess" : "true"
+               }
+            } ]
+      } ], 
+   "tags" : {
+      "Team" : [ "Loyalty" ],
+      "Generated": [ "true" ]
+   },
+   "clientOrganizations" : [ "API Development" ]
+}

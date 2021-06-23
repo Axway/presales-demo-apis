@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: paysAsYouLive
+  version: '1.0'
+paths:
+  '/score/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get your patient's health score right now!
+      tags: []
+      responses:
+        '200':
+          $ref: '#/components/responses/ScoreResp'
+      operationId: score-id
+      description: "Get the user's health score. OK ✅  or warning ⚠️ is fine.\nAlert \U0001F6A8 triggers an encounter with your physician \U0001FA7A "
+components:
+  schemas:
+    Score:
+      title: Score
+      type: object
+      description: Health score for a patient
+      properties:
+        date:
+          x-faker: date.recent
+          type: string
+        id_patient:
+          type: string
+          pattern: '[0-9]{6}'
+        score:
+          type: number
+          minimum: 0
+          maximum: 10
+  responses:
+    ScoreResp:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Score'
+              - type: object
+                properties:
+                  id_resp:
+                    type: string
+                    pattern: '[0-9]{9}'

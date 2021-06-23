@@ -1,0 +1,56 @@
+name: 'get ref informations'
+description: |
+    Substitutes any bash-like parameter (e.g. ${HOME} or ${PWD%/*})
+    Considers only variables that are enclosed in curly brackets.
+    As with any templating system that reads from the environment,
+    great care must be taken not to leak secrets in this substitution.
+
+    This script also computes (and outputs) the following 3 values:
+    GITHUB_REF_TYPE (outputs to type), GITHUB_REF_NAME (outputs to name) and GITHUB_REF_SSHA (outputs to ssha).
+    See the outputs of this action for further information about these values.
+    They are all thrice candidate to substitution: ${GITHUB_REF_NAME} will be replaced
+    by the tag/branch name in any template for instance.
+
+    in order, this script will:
+      - find any file suffixed by the given input suffix.
+        By default, these files would be all files in the working directory ending in '.template'
+        In bash globbing syntax, those would be '**.template', which ignores any hidden files/directories.
+      - copy the template to its target: a file with the same name but without the suffix
+        for instance, the template 'a.json.template' is copied to the target 'a.json'.
+        If the target exists already, **IT IS OVERWRITTEN**. We are _that_ cruel.
+      - replace in place any parameter in the target by its value, like ebash would do.
+        for instance, if the script get the following line 'this is ${HOME%/*}' would probably become 'this is /home'
+      - move to the next template, if any.
+    
+    Caveats:
+      - No attempt is made to process templates that are hidden files or are in hidden directories. Those are ignored.
+      - If you use another templating system that requires a ${}, they might be some conflicts.
+      - If you want to use a ${} without it being substitued in a template, you are screwed. (we _are_ a cruel bunch)
+      - We rely blatantly on the shell that your runner executes. So your mileage might vary significantly depending on 
+        the OS you run. This script has been tested on Ubuntu 21-04.
+    
+    Disclaimer:
+      This is a script for small repos. You you have hundreds of templates, you _will_ have performance issues,
+      since this script forks a new bash per file, uses sed and grep etc... and all this takes more time than more comprehensive
+      templating systems like jinja2 or such. 
+inputs:
+  suffix:
+    description: "suffix to find out where are the suffixes. Defaults to '.template'"
+    required: false
+    default: ".template"
+outputs:
+  type:
+    description: "the type of ref: 'tag', 'branch', or 'none' if we are on no branch or tag (e.g. deletion)"
+    value: ${{ steps.split-ref.outputs.type }}
+  name:
+    description: "the name of tag or branch, or 'nowhere' if we are on no branch or tag (e.g. deletion)"
+    value: ${{ steps.split-ref.outputs.name }}
+  ssha:
+    description: "the short sha of the commit: first 7 characters of its id"
+    value: ${{ steps.split-ref.outputs.ssha }}
+runs:
+  using: "composite"
+  steps:
+    - id: split-ref
+      run: ${{ github.action_path }}/filter.sh ${{ inputs.suffix }}
+      shell: bash
