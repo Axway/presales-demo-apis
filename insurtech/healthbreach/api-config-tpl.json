@@ -1,0 +1,13 @@
+{
+  "$merge": {
+    "source": {
+      "$import": "../defaults.json"
+    },
+    "with": {
+      "name": "Health Breach",
+      "summary": "",
+      "path": "/breach",
+      "version": "1.0"
+    }
+  }
+}

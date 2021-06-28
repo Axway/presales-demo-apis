@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: healthBreach.yaml`
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/status/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    get:
+      summary: Get patient's health summary
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/StatusOkWarning'
+                  - $ref: '#/components/schemas/StatusAlert'
+              examples: {}
+      operationId: get-status-id
+components:
+  schemas:
+    StatusOkWarning:
+      title: StatusOK
+      type: object
+      properties:
+        id:
+          type: string
+          pattern: '[0-9]{6}'
+        patient_id:
+          type: string
+          pattern: '[0-9]{9}'
+        status:
+          type: string
+          enum:
+            - ok
+            - warning
+        date:
+          type: string
+          x-faker: date.recent
+    StatusAlert:
+      title: StatusAlert
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          pattern: '[0-9]{6}'
+        patient_id:
+          type: string
+          pattern: '[0-9]{9}'
+        status:
+          type: string
+          enum:
+            - ALERT
+        date:
+          type: string
+          x-faker: date.now
+        appointment:
+          type: string
+          pattern: 'https\:\/\/ptx136\.demo\.axway\.com\:8065\/appointment/Appointment\/[0-9]{6}'

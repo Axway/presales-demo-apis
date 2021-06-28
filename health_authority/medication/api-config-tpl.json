@@ -1,0 +1,13 @@
+{
+  "$merge": {
+    "source": {
+      "$import": "../defaults.json"
+    },
+    "with": {
+      "name": "FHIR Medication",
+      "summary": "",
+      "path": "/medication",
+      "version": "4.0.1-3"
+    }
+  }
+}

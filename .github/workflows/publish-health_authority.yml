@@ -1,10 +1,10 @@
-name: Deploy all Couponning APIs
+name: Deploy all Health Authority APIs
 
 on:
   push:
     branches:
       - demo
-    paths: couponing/**
+    paths: health_authority/**
 
 jobs:
   API-Deployment:
@@ -13,10 +13,9 @@ jobs:
     strategy:
       matrix:
         api:
-          - amazon
-          - decathlon
-          - nike
-          - puma
+          - doctolib
+          - medication
+          - statement
     steps:
       - 
         name: Checkout the git repository
@@ -33,4 +32,4 @@ jobs:
           APIM_HOST: ${{ secrets.APIM_HOST }}
           APIM_PORT: ${{ secrets.APIM_PORT }}
         with:
-          command: api import -c couponing/${{ matrix.api }}/api-config.json
+          command: api import -c health_authority/${{ matrix.api }}/api-config.json

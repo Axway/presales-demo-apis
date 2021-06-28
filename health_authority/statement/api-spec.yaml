@@ -1,0 +1,547 @@
+openapi: 3.0.1
+info:
+  title: 'HAPI FHIR Server'
+  contact: {}
+  version: 5.5.0-PRE1-SNAPSHOT/e359b6d823/2021-05-19
+  description: "Medication endpoints for the FHIR specification"
+servers:
+  - url: 'http://hapi.fhir.org/baseR4'
+    description: 'HAPI FHIR Server'
+tags:
+  - name: MedicationStatement
+    description: 'The MedicationStatement FHIR resource type'
+paths:
+  '/MedicationStatement/{id}':
+    get:
+      tags:
+        - MedicationStatement
+      summary: 'read-instance: Read MedicationStatement instance'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+    put:
+      tags:
+        - MedicationStatement
+      summary: 'update-instance: Update an existing MedicationStatement instance, or create using a client-assigned ID'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+    delete:
+      tags:
+        - MedicationStatement
+      summary: 'instance-delete: Perform a logical delete on a resource instance'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+    patch:
+      tags:
+        - MedicationStatement
+      summary: 'instance-patch: Patch a resource instance of type MedicationStatement by ID'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/_history/{version_id}':
+    get:
+      tags:
+        - MedicationStatement
+      summary: 'vread-instance: Read MedicationStatement instance with specific version'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+        - name: version_id
+          in: path
+          description: 'The resource version ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  /MedicationStatement:
+    get:
+      tags:
+        - MedicationStatement
+      summary: 'search-type: Update an existing MedicationStatement instance, or create using a client-assigned ID'
+      description: 'This is a search type'
+      parameters:
+        - name: _language
+          in: query
+          description: 'The language of the resource'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: identifier
+          in: query
+          description: 'Return statements with this external identifier'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: code
+          in: query
+          description: 'Return statements of this medication code'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: subject
+          in: query
+          description: 'The identity of a patient, animal or group to list statements for'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _lastUpdated
+          in: query
+          description: "Only return resources which were last updated as specified by\nthe given range"
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _security
+          in: query
+          description: 'Search for resources which have the given security labels'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: medication
+          in: query
+          description: 'Return statements of this medication reference'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: part-of
+          in: query
+          description: 'Returns statements that are part of another event.'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: source
+          in: query
+          description: 'Who or where the information in the statement came from'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _filter
+          in: query
+          description: 'Search the contents of the resource''s data using a filter'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: effective
+          in: query
+          description: 'Date when patient was taking (or not taking) the medication'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _profile
+          in: query
+          description: 'Search for resources which have the given profile'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: patient
+          in: query
+          description: 'Returns statements for a specific patient.'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _has
+          in: query
+          description: 'Return resources linked to by the given target'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _tag
+          in: query
+          description: 'Search for resources which have the given tag'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: context
+          in: query
+          description: "Returns statements for a specific context (episode or episode\nof Care)."
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _source
+          in: query
+          description: 'Search for resources which have the given source value (Resource.meta.source)'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _id
+          in: query
+          description: 'The ID of the resource'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: category
+          in: query
+          description: 'Returns statements of this category of medicationstatement'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _content
+          in: query
+          description: 'Search the contents of the resource''s data using a fulltext search'
+          schema: { $ref: "#/components/schemas/params" }
+        - name: _text
+          in: query
+          description: "Search the contents of the resource's narrative using a fulltext\nsearch"
+          schema: { $ref: "#/components/schemas/params" }
+        - name: status
+          in: query
+          description: 'Return statements that match the given status'
+          schema: { $ref: "#/components/schemas/params" }
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      tags:
+        - MedicationStatement
+      summary: 'create-type: Create a new MedicationStatement instance'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  /MedicationStatement/_history:
+    get:
+      tags:
+        - MedicationStatement
+      summary: 'type-history: Fetch the resource change history for all resources of type MedicationStatement'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/_history':
+    get:
+      tags:
+        - MedicationStatement
+      summary: 'instance-history: Fetch the resource change history for all resources of type MedicationStatement'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  /MedicationStatement/$expunge:
+    post:
+      tags:
+        - MedicationStatement
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: 'FHIR Resource'
+              type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/$expunge':
+    post:
+      tags:
+        - MedicationStatement
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: 'FHIR Resource'
+              type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  /MedicationStatement/$meta:
+    get:
+      tags:
+        - MedicationStatement
+      description: 'Request a global list of tags, profiles, and security labels'
+      parameters:
+        - name: return
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/$meta':
+    get:
+      tags:
+        - MedicationStatement
+      description: 'Request a global list of tags, profiles, and security labels'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+        - name: return
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/$meta-add':
+    post:
+      tags:
+        - MedicationStatement
+      description: 'Add tags, profiles, and/or security labels to a resource'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: 'FHIR Resource'
+              type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/$meta-delete':
+    post:
+      tags:
+        - MedicationStatement
+      description: 'Delete tags, profiles, and/or security labels from a resource'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              title: 'FHIR Resource'
+              type: object
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  /MedicationStatement/$validate:
+    get:
+      tags:
+        - MedicationStatement
+      parameters:
+        - name: resource
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+        - name: mode
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+        - name: profile
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/$validate':
+    get:
+      tags:
+        - MedicationStatement
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+        - name: resource
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+        - name: mode
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+        - name: profile
+          in: query
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/$graphql':
+    get:
+      tags:
+        - MedicationStatement
+      description: 'This operation invokes a GraphQL expression for fetching an joining a graph of resources, returning them in a custom format.'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+  '/MedicationStatement/{id}/$diff':
+    get:
+      tags:
+        - MedicationStatement
+      summary: 'Comparte two resources or two versions of a single resource'
+      description: 'This operation examines two resource versions (can be two versions of the same resource, or two different resources) and generates a FHIR Patch document showing the differences.'
+      parameters:
+        - name: id
+          in: path
+          description: 'The resource ID'
+          required: true
+          style: simple
+          schema:
+            minimum: 1
+            type: string
+        - name: from
+          in: query
+          description: 'The resource ID and version to diff from'
+          required: true
+          schema: { $ref: "#/components/schemas/params" }
+        - name: to
+          in: query
+          description: 'The resource ID and version to diff to'
+          required: true
+          schema: { $ref: "#/components/schemas/params" }
+        - name: includeMeta
+          in: query
+          description: "Should differences in the Resource.meta element be included in\nthe diff"
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+        - name: fromVersion
+          in: query
+          description: 'The resource ID and version to diff from'
+          required: false
+          schema: { $ref: "#/components/schemas/params" }
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: object
+components:
+  schemas:
+    params:
+      title: simple param
+      type: string

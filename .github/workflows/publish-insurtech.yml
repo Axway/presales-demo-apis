@@ -13,8 +13,9 @@ jobs:
     strategy:
       matrix:
         api:
+          - gfgl
+          - healthbreach
           - payl
-         # - gfgl
     steps:
       - 
         name: Checkout the git repository
@@ -31,4 +32,4 @@ jobs:
           APIM_HOST: ${{ secrets.APIM_HOST }}
           APIM_PORT: ${{ secrets.APIM_PORT }}
         with:
-          command: api import -c insurtech/${{ matrix.api }}/${{ matrix.api }}.json
+          command: api import -c insurtech/${{ matrix.api }}/api-config.json

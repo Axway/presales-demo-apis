@@ -1,0 +1,50 @@
+{
+  "name": "",
+  "path": "",
+  "state": "published",
+  "version": "",
+  "organization": "API Development",
+  "apiDefinition": "api-spec.yaml",
+  "backendBasepath": "http://ptx136.demo.axway.com:8081/",
+  "image": "api-image.jpg",
+  "securityProfiles": [
+    {
+      "name": "_default",
+      "isDefault": true,
+      "devices": [
+        {
+          "name": "API Key",
+          "type": "apiKey",
+          "order": 1,
+          "properties": {
+            "apiKeyFieldName": "KeyId",
+            "takeFrom": "HEADER",
+            "removeCredentialsOnSuccess": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "tags": {
+    "Team": [
+      "Default"
+    ]
+  },
+  "clientOrganizations": [
+    "API Development"
+  ],
+  "applications": [
+    {
+      "name": "injection",
+      "enabled": true,
+      "state": "approved",
+      "oauthResources": []
+    },
+    {
+      "name": "Human",
+      "enabled": true,
+      "state": "approved",
+      "oauthResources": []
+    }
+  ]
+}

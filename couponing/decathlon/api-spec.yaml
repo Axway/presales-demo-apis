@@ -12,7 +12,7 @@ tags:
   - name: coupon
   - name: 'decathlon'
 paths:
-  /decathlon/coupon:
+  /coupon:
     get:
       summary: Get a decathlon coupon
       tags: []

@@ -1,0 +1,86 @@
+openapi: 3.0.0
+info:
+  contact:
+    name: demo
+    email: demo@axway.com
+  title: Nestlé's program GoodFoodGoodLife couponning api
+  version: '1.0'
+  description: 'https://api.nestle.com/coupon/ specs'
+servers:
+  - url: 'https://api.nestle.com'
+tags:
+  - name: coupon
+paths:
+  '/coupon/{user_id}':
+    get:
+      summary: Get a coupon from our partners
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Coupon'
+              examples: {}
+      operationId: get-gfgl-coupon
+      description: Get a coupon from our partners
+    parameters:
+      - schema:
+          type: string
+        name: user_id
+        in: path
+        required: true
+components:
+  schemas:
+    RangeDate:
+      title: RangeDate
+      type: object
+      properties:
+        start:
+          type: string
+          x-faker: date.past
+        end:
+          type: string
+          x-faker: date.future
+    Coupon:
+      title: Coupon
+      type: object
+      x-examples: {}
+      properties:
+        id:
+          type: string
+          pattern: '[0-9]{7}'
+        partner:
+          type: string
+          enum:
+            - nike
+            - amazon
+            - decathlon
+        code:
+          type: string
+          enum:
+            - SPRINGOFF
+            - BACKTOSCHOOL
+            - XMASGIFT
+            - SUMMERTIME
+            - HLLWN
+            - MOTHERSDAY
+            - FATHERSDAY
+            - SWAG_ON
+            - JUSTDOIT
+        validity:
+          $ref: '#/components/schemas/RangeDate'
+        amount:
+          type: string
+          enum:
+            - 10€
+            - 20€
+            - 5€
+            - 15€
+        recipient:
+          type: string
+          x-faker: internet.email
+          format: email
+  securitySchemes: {}
+  examples: {}

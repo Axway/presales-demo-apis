@@ -1,0 +1,14 @@
+{
+  "$merge": {
+    "source": {
+      "$import": "../defaults.json"
+    },
+    "with": {
+      "name": "Pay as you Live",
+      "summary": "",
+      "path": "/payl",
+      "version": "3.0",
+      "image": "payl-old.png"
+    }
+  }
+}

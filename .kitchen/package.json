@@ -1,0 +1,14 @@
+{
+  "name": "secrets",
+  "version": "1.0.0",
+  "description": "find recursively a file named .env and loads it in the environment before launching the command given as argument.",
+  "bin": {
+    "hush": "cli.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "find-config": "^1.0.0",
+    "minimist": "^1.2.5"
+  }
+}

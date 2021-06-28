@@ -1,0 +1,466 @@
+swagger: '2.0'
+info:
+  description: 'A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s). For more information: https://www.hl7.org/fhir/appointment.html'
+  version: '3.0'
+  title: 'FHIR Appointment'
+host: fhir3.healthintersections.com.au
+basePath: /open/
+schemes:
+  - http
+security:
+  -
+    'API Key': []
+paths:
+  '/Appointment/{id}/_tags/_delete':
+    post:
+      description: 'Removes all tags in the provided list of tags for the nominated resource'
+      operationId: 'POST /Appointment/{id}/_tags/_delete'
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '204':
+          description: 'Status 204'
+  /metadata:
+    get:
+      description: 'Retrieve resource'
+      operationId: 'GET /metadata'
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '200':
+          description: "Succesfully retrieved resource\n"
+  '/Appointment/{id}/_history/{vid}/_tags':
+    get:
+      description: 'get a list of tags used for the nominated version of the resource.  This duplicates the HTTP header entries.'
+      operationId: 'GET /Appointment/{id}/_history/{vid}/_tags'
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: vid
+          in: path
+          required: true
+          type: string
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: "Succesfully retrieved resource\n"
+    post:
+      description: 'Affix tags in the list to the nominated verion of the resource'
+      operationId: 'POST /Appointment/{id}/_history/{vid}/_tags'
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: vid
+          in: path
+          required: true
+          type: string
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '201':
+          description: "Succesfully affix tags\n"
+  '/Appointment/{id}/_history/{vid}/_tags/_delete':
+    post:
+      description: 'Removes all tags in the provided list of tags for the nominated version of the resource'
+      operationId: 'POST /Appointment/{id}/_history/{vid}/_tags/_delete'
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: vid
+          in: path
+          required: true
+          type: string
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '204':
+          description: 'Successful deletion of tags'
+  '/Appointment/{id}/_tags':
+    get:
+      description: 'get a list of tags used for the nominated resource. This duplicates the HTTP header entries'
+      operationId: 'GET /Appointment/{id}/_tags'
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: "Succesfully retrieved resource\n"
+    post:
+      description: 'Affix tags in the list to the nominated resource'
+      operationId: 'POST /Appointment/{id}/_tags'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '201':
+          description: "Succesfully affix tags\n"
+  /Appointment/$validate:
+    get:
+      operationId: 'GET /Appointment/$validate'
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '200':
+          description: 'Status 200'
+  '/Appointment/{id}/_history':
+    get:
+      operationId: 'GET /Appointment/{id}/_history'
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Status 200'
+  '/Appointment/{id}/$everything':
+    get:
+      operationId: 'GET /Appointment/{id}/$everything'
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Status 200'
+  '/Appointment/{id}':
+    get:
+      operationId: 'GET /Appointment/{id}'
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Status 200'
+        '404':
+          description: "Tried to get an unknown resource\n"
+        '410':
+          description: "Tried to get a deleted resource\n"
+        '422':
+          description: "Unprocessable Entity - the proposed resource violated applicable FHIR  profiles or server business rules.  This should be accompanied by an OperationOutcome resource providing additional detail.\n"
+    put:
+      description: 'Update an existing instance'
+      operationId: 'PUT /Appointment/{id}'
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: "Succesfully updated the instance \n"
+        '201':
+          description: "Succesfully created the instance \n"
+        '400':
+          description: "Bad Request - Resource cound not be parsed or failed basic FHIR validation rules\n"
+        '404':
+          description: "Not Found - resource type not support, or not a FHIR validation rules\n"
+        '405':
+          description: "Method Not allowed - the resource did not exist prior to the update, and the server does not allow client defined ids\n"
+        '409':
+          description: "Version conflict management\n"
+        '412':
+          description: "Version conflict management\n"
+        '422':
+          description: "Unprocessable Entity - the proposed resource violated applicable FHIR  profiles or server business rules.  This should be accompanied by an OperationOutcome resource providing additional detail.\n"
+    delete:
+      description: 'Delete resource'
+      operationId: 'DELETE /Appointment/{id}'
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '204':
+          description: "Succesfully deleted resource\n"
+        '404':
+          description: "Not Found - resource was not found\n"
+        '405':
+          description: "Method Not allowed - delete is not allowed\n"
+  '/Appointment/_validate/{id}':
+    post:
+      description: 'Create a new resource'
+      operationId: 'POST /Appointment/_validate/{id}'
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '201':
+          description: "Validates a type\n"
+  '/Appointment/{id}/_history/{vid}':
+    get:
+      operationId: 'GET /Appointment/{id}/_history/{vid}'
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: vid
+          in: path
+          required: true
+          type: string
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Status 200'
+  /Appointment/_tags:
+    get:
+      description: 'get a list of tags used for the nominated resource type'
+      operationId: 'GET /Appointment/_tags'
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '200':
+          description: "Succesfully retrieved resource\n"
+  /Appointment:
+    get:
+      description: 'Get Appointment'
+      operationId: 'GET /Appointment'
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '200':
+          description: 'Status 200'
+    post:
+      description: 'Create a new type'
+      operationId: 'POST /Appointment'
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '201':
+          description: "Succesfully created a new type\n"
+        '400':
+          description: "Bad Request - Resource cound not be parsed or failed basic FHIR validation rules\n"
+        '404':
+          description: "Not Found - resource type not support, or not a FHIR validation rules\n"
+  /Appointment/_history:
+    get:
+      operationId: 'GET /Appointment/_history'
+      produces:
+        - application/atom+xml
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: 'Status 200'
+  /_tags:
+    get:
+      description: 'get a list of all tags'
+      operationId: 'GET /_tags'
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '200':
+          description: "Succesfully retrieved resource\n"
+  /:
+    get:
+      description: 'Retrieve resource'
+      operationId: 'GET /'
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '200':
+          description: "Succesfully retrieved resource\n"
+    post:
+      description: 'Create a new resource'
+      operationId: 'POST /'
+      consumes:
+        - application/json
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '201':
+          description: "Succesfully created a new resource\n"
+  '/Appointment/{id}/$validate':
+    get:
+      operationId: 'GET /Appointment/{id}/$validate'
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: 'Status 200'
+  /$meta:
+    get:
+      operationId: 'GET /$meta'
+      parameters: []
+      responses:
+        '200':
+          description: "Successfully retrieved resource(s)\n"
+  /Appointment/$meta:
+    get:
+      operationId: 'GET /Appointment/$meta'
+      parameters: []
+      responses:
+        '200':
+          description: "Successfully retrieved resource(s)\n"
+  /_history:
+    get:
+      description: 'Whole System History'
+      operationId: 'GET /_history'
+      produces:
+        - application/json
+        - application/xml
+      parameters: []
+      responses:
+        '200':
+          description: "Succesfully retrieved resource\n"
+  /Appointment/_search:
+    get:
+      operationId: 'GET /Appointment/_search'
+      produces:
+        - application/atom+xml
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: 'Status 200'
+securityDefinitions:
+  'API Key':
+    description: 'API Key'
+    type: apiKey
+    name: KeyId
+    in: header
+x-axway:
+  serviceType: rest
+  image: /api/portal/v1.3/discovery/swagger/apis/72b1e387-dc5b-435b-964e-d431bd57f52a/image
+  basePaths:
+    - 'https://ptx136.demo.axway.com:8065'
+  retirementDate: 0
+  corsEnabled: true
+  deprecated: false
+  availableSDK:
+    ios-swift: /discovery/sdk/72b1e387-dc5b-435b-964e-d431bd57f52a/ios-swift
+    titanium: /discovery/sdk/72b1e387-dc5b-435b-964e-d431bd57f52a/titanium
+    android: /discovery/sdk/72b1e387-dc5b-435b-964e-d431bd57f52a/android
+    nodejs: /discovery/sdk/72b1e387-dc5b-435b-964e-d431bd57f52a/nodejs
+  apiResourceType: swagger20
+  accessGrantedDate: 1559049612513
+  tags:
+    Industry:
+      - Healthcare
+    Type:
+      - Demo_FHIR
+    Category:
+      - Workflow
+      - ' Scheduling'
+    Mocking:
+      - PassThrough
+    Standard:
+      - FHIR
+    Team:
+      - HealthAuthority
+  expired: false
+  id: 72b1e387-dc5b-435b-964e-d431bd57f52a
+  state: published

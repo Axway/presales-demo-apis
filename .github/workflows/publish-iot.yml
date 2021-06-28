@@ -1,10 +1,10 @@
-name: Deploy all Couponning APIs
+name: Deploy all iot APIs
 
 on:
   push:
     branches:
       - demo
-    paths: couponing/**
+    paths: iot/**
 
 jobs:
   API-Deployment:
@@ -13,10 +13,8 @@ jobs:
     strategy:
       matrix:
         api:
-          - amazon
-          - decathlon
-          - nike
-          - puma
+          - apple-health
+          - fitbit
     steps:
       - 
         name: Checkout the git repository
@@ -33,4 +31,4 @@ jobs:
           APIM_HOST: ${{ secrets.APIM_HOST }}
           APIM_PORT: ${{ secrets.APIM_PORT }}
         with:
-          command: api import -c couponing/${{ matrix.api }}/api-config.json
+          command: api import -c iot/${{ matrix.api }}/api-config.json

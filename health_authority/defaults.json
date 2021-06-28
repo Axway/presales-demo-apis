@@ -1,0 +1,41 @@
+{
+  "name": "",
+  "path": "",
+  "state": "published",
+  "version": "",
+  "organization": "FHIR",
+  "apiDefinition": "api-spec.yaml",
+  "descriptionType": "manual",
+  "descriptionManual": "A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s). For more information: https://www.hl7.org/fhir/appointment.html",
+  "backendBasepath": "http://hapi.fhir.org/baseR4/",
+  "image": "api-image.jpg",
+  "securityProfiles": [
+    {
+      "name": "_default",
+      "isDefault": true,
+      "devices": [
+        {
+          "name": "API Key",
+          "type": "apiKey",
+          "order": 1,
+          "properties": {
+            "apiKeyFieldName": "KeyId",
+            "takeFrom": "HEADER",
+            "removeCredentialsOnSuccess": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "tags": {
+    "Generated": [
+      "true"
+    ],
+    "Team": [
+      "HealthAuthority"
+    ]
+  },
+  "clientOrganizations": [
+    "API Development"
+  ]
+}
