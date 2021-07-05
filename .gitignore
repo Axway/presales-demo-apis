@@ -2,3 +2,4 @@ node_modules
 .testing
 gen.*
 .local.env
+api-config.json

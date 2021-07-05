@@ -17,8 +17,6 @@
   },
   "homepage": "https://github.com/Axway/presales-demo-apis#readme",
   "dependencies": {
-    "find-config": "^1.0.0",
-    "json-merger": "^1.1.6",
-    "secrets": "file:.kitchen"
+    "json-merger": "^1.1.6"
   }
 }
