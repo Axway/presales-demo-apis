@@ -4,7 +4,7 @@
   "state": "published",
   "version": "",
   "organization": "API Development",
-  "apiDefinition": "../iot.yaml",
+  "apiDefinition": "api-spec.yaml",
   "summary": "",
   "backendBasepath": "http://ptx136.demo.axway.com:8081/",
   "image": "api-image.jpg",
@@ -49,3 +49,4 @@
     "API Development"
   ]
 }
+
