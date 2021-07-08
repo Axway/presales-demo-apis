@@ -44,7 +44,7 @@ export APIM := docker run --rm -e APIM_HOST="${APIM_HOST}" -e APIM_USER="${APIM_
 .PHONY: $(GOALS) $(SUBDIRS)
 SUBDIRS := $(patsubst %/Makefile,%,$(wildcard */Makefile))
 
-GOALS := $(filter-out init,$(or $(MAKECMDGOALS),all))
+GOALS := $(filter-out init probe,$(or $(MAKECMDGOALS),all))
 $(GOALS): $(SUBDIRS)
 
 # Anything happening to any subfolder of interrest triggers
@@ -56,6 +56,9 @@ $(SUBDIRS): init
 # Make sure that, if there is no node_modules folder, an npm install is ran.
 # That way, e.g. json-merger, on which several other Makefiles downtream depend, is available.
 init: node_modules .local.env
+
+probe: init
+	$(APIM) api get
 
 node_modules:
 	@npm i -y
