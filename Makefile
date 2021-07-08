@@ -44,8 +44,12 @@ export APIM := docker run --rm -e APIM_HOST="${APIM_HOST}" -e APIM_USER="${APIM_
 .PHONY: $(GOALS) $(SUBDIRS)
 SUBDIRS := $(patsubst %/Makefile,%,$(wildcard */Makefile))
 
-GOALS := $(filter-out init,$(or $(MAKECMDGOALS),all))
+GOODGOALS := $(filter-out init probe node_modules .local.env,$(MAKECMDGOALS))
+
+ifneq ($(strip $(GOODGOALS)),)
+GOALS := $(filter-out init probe,$(or $(MAKECMDGOALS),all))
 $(GOALS): $(SUBDIRS)
+endif
 
 # Anything happening to any subfolder of interrest triggers
 # init, which basically installs some NodeJS tooling
@@ -56,6 +60,9 @@ $(SUBDIRS): init
 # Make sure that, if there is no node_modules folder, an npm install is ran.
 # That way, e.g. json-merger, on which several other Makefiles downtream depend, is available.
 init: node_modules .local.env
+
+probe: init
+	$(APIM) api get
 
 node_modules:
 	@npm i -y
@@ -75,4 +82,4 @@ node_modules:
 	export APIM_USER?=apiadmin \n\
 	export APIM_PASS?=changeme \n\
 	export APIM:=docker run --rm -e APIM_HOST="$${APIM_HOST}" -e APIM_USER="$${APIM_USER}" -e APIM_PASS="$${APIM_PASS}" -e APIM_PORT="$${APIM_PORT}" -v $$$$(pwd):$$$$(pwd) -w $$$$(pwd) jmcabrera/apim-cli:1.3.7' >> .local.env
-	
+
