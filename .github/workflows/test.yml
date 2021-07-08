@@ -1,0 +1,14 @@
+
+name: Test
+on: push
+jobs:
+  List-APIs:
+    env:
+      APIM_USER: ${{ secrets.APIM_USER }}
+      APIM_PASS: ${{ secrets.APIM_PASS }}
+      APIM_HOST: ${{ secrets.APIM_HOST }}
+      APIM_PORT: ${{ secrets.APIM_PORT }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: make probe
